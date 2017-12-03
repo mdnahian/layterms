@@ -10,11 +10,11 @@ text='\n'.join(text)
 f.close()
 
 # Google Cloud API
-api_url = 'https://language.googleapis.com/v1/documents:analyzeEntities?key=AIzaSyDZUZaUB5Oz52iTRk4KYYNjqGtV6XLXEV8'
+api_url = 'https://language.googleapis.com/v1/documents:analyzeSyntax?key=AIzaSyDZUZaUB5Oz52iTRk4KYYNjqGtV6XLXEV8'
 
-data = {'document':{'type':'PLAIN_TEXT','content':text},'encodingType':'UTF8'}
+entityData = {'document':{'type':'PLAIN_TEXT','content':text},'encodingType':'UTF8'}
 
-response = requests.post(api_url, json.dumps(data))
+response = requests.post(api_url, json.dumps(entityData))
 
 # Writing response
 f = open('Corpus/'+currWebsite+'.raw','w+')
