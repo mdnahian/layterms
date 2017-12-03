@@ -1,7 +1,23 @@
+import re
+
 class Policy:
     def __init__(self, service, text):
         self.service = service 
         self.text = text # should be list of paragraphs with headings
+
+collection_keywords = ['get', 'gets', 'getting',
+                       'collect', 'collects', 'collecting',
+                       'use', 'uses', 'using',
+                       'receive', 'receives', 'receiving',
+                       'log', 'logs', 'logging',
+                       'record,' 'records', 'recording',
+                       'give', 'gives', 'giving',
+                       'store', 'stores', 'storing',
+                       'obtain', 'obtains', 'obtaining',
+                       'provide', 'provides', 'providing'
+                       ]
+
+neg_keywords = ['do not', 'does not', 'will not', 'never', 'will never', 'won\'t', 'doesn\'t']
 
 info_types = {'name':
                 ['name'],
@@ -43,8 +59,8 @@ info_types = {'name':
                 [],
               'third party account information':
                 [],
-              'mobile service provider':
-                [],
+              'service provider':
+                ['service provider'],
               'cookies':
                 ['cookie', 'cookies'],
               'web beacons':
@@ -63,8 +79,46 @@ info_types = {'name':
                 []
               }
 
+use_types = {'personalized content':
+                ['personalized content'],
+             'targeted ads':
+                ['targeted ads'],
+             'improving the product':
+                ['improving the product'],
+             'necessary communication':
+                ['necessary communication'],
+             'marketing communication':
+                ['marketing communication'],
+             'processing payment':
+                ['processing payment'],
+             'complying with the law':
+                ['complying with the law']
+              }
+
+entities = {'advertisers':
+                ['advertisers'],
+            'corporate affiliates':
+                ['affiliates'],
+            'authorities':
+                ['authorities'],
+            'social media you log in with':
+                ['social media you log in with'],
+            'business partners':
+                ['business partners']
+              }
+
+def check_if_negative(data, subject):
+    pass
+
 def do_they_collect(data, info_type):
-    return bool(sum([data.lower().count(x.lower()) for x in info_types[info_type]]))
+    data = data.lower()
+    sentences = re.findall(r"([^.]*\.)", data)
+    for sentence in sentences:
+        for c_keyword in collection_keywords:
+            for i_keyword in info_types[info_type]:
+                if c_keyword.lower() in sentence and i_keyword.lower() in sentence and all(negative not in sentence for negative in neg_keywords):
+                    return True
+    return False
 
 def is_use_used(use):
     pass
@@ -78,8 +132,10 @@ def analyze(company, policy):
         data = textfile.read().replace('\n', '')
         for info_type in info_types:
             info_dict[info_type] = do_they_collect(data, info_type)
-    return company, info_dict
+    return info_dict
 
-print(analyze('Stripe', 'stripe_policy.txt'))
+print(analyze('Twitter', 'policies/twitter_policy.txt'))
+
+
 
 
