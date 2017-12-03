@@ -22,23 +22,28 @@ function getLastUpdated(id, callback){
 
 
 function sendContent(id, title, updated){
-    chrome.tabs.sendMessage(id, {"action": "source"}, function(source) {
-        $.post("https://1d242726.ngrok.io/api/content", {
-            "content": source,
-            "title": title,
-            "updated": updated
-        }).done(function(data) {
-            if(data.status !== "error"){
-                console.log('sending...');
-                chrome.tabs.create({'url': chrome.extension.getURL('response.html')+"?title="+title+"&updated="+updated});
-                // chrome.tabs.sendMessage(id, {"action": "final", "data": data});
-            } else {
-                console.log("error");
-            }
-            $("#analyze").removeClass('is-loading');
-        });
+    // chrome.tabs.sendMessage(id, {"action": "source"}, function(source) {
+    //     $.post("https://1d242726.ngrok.io", {
+    //         "content": source,
+    //         "title": title,
+    //         "updated": updated
+    //     }).done(function(data) {
+    //         if(data.status !== "error"){
+    //             console.log('sending...');
+    //
+    //
+    //
+    //             // chrome.tabs.create({'url': "https://1d242726.ngrok.io?title="+title+"&updated="+updated});
+    //             // chrome.tabs.sendMessage(id, {"action": "final", "data": data});
+    //         } else {
+    //             console.log("error");
+    //         }
+    //         $("#analyze").removeClass('is-loading');
+    //     });
+    //
+    // });
 
-    });
+    chrome.tabs.create({'url': "https://1d242726.ngrok.io"});
 
 
 }

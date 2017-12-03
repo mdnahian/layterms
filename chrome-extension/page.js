@@ -6,8 +6,8 @@ var js = '<script>$("#closeBtn").click(function() { $("#reactsModal").toggleClas
 var loaded = false;
 
 function modal(data){
-    // data = JSON.parse(data);
-    console.log(data);
+    data = JSON.parse(data);
+    console.log(data.title);
     return '<div id="reactsModal" class="reacts-container"> ' +
         '<div id="closeBtn" class="close-btn">X</div> ' +
         '<div class="reacts-modal"> ' +
@@ -98,33 +98,33 @@ function getData(){
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // var url = new URL(window.location.href);
-    // var title = url.searchParams.get("title");
-    // var updated = url.searchParams.get("updated");
-    //
-    //
-    // var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function(data) {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         if(!loaded){
-    //
-    //             document.getElementsByTagName('head')[0].innerHTML = document.getElementsByTagName('head')[0].innerHTML + style;
-    //             document.getElementsByTagName("body")[0].innerHTML = modal(data.currentTarget.responseText) + js + document.getElementsByTagName('body')[0].innerHTML;
-    //
-    //             loaded = true;
-    //         }
-    //
-    //         $("#reactsModal").toggleClass('reacts-list-active');
-    //     }
-    // };
-    // xhttp.open("POST", "https://1d242726.ngrok.io/api/content", true);
-    // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xhttp.send("title="+title+"&updated="+updated+"&content="+getData());
+    var url = new URL(window.location.href);
+    var title = url.searchParams.get("title");
+    var updated = url.searchParams.get("updated");
 
 
-    var data = {"status": "success", "updated": "hello", "modal": [{"content": "\n mdni007\nTwitter Privacy Policy\n\nOur Services instantly connect people everywhere to what\u2019s most meaningful to them. For example, any registered user of Twitter can send a Tweet, which is public by default, and can include a message of 140 characters or less and content like photos, videos, and links to other websites. This Privacy Policy describes how and when we collect, use, and share your information across our websites, SMS, APIs, email notifications, applications, buttons, embeds, ads, and our other covered services that link to this Policy (collectively, the \u201cServices\u201d), and from our partners and other third parties.", "type": "text", "title": "Summary"}, {"content": {"headers": ["Type of Data", "Collected?*", "Context"], "rows": [["Microphone", false, "-"], ["Accelerometer", false, "-"], ["Contacts", false, "-"], ["Site you came from", false, "-"], ["IP address", false, "-"], ["Camera", false, "-"], ["Web beacons", false, "-"], ["Email address", false, "-"], ["Phone number", false, "-"], ["Photos", false, "-"], ["Gyroscope", false, "-"], ["Address", false, "-"], ["Device", false, "-"], ["Browser", false, "-"], ["Operating system", false, "-"], ["Name", false, "-"], ["Gender", false, "-"], ["Birthdate", false, "-"], ["Payment information", false, "-"], ["GPS", false, "-"], ["Cookies", false, "-"], ["SSN", false, "-"]]}, "type": "table", "title": "Data Collected"}, {"content": {"headers": ["Entity", "Data Shared?", "Context"], "rows": [["Authorities", false, "-"], ["Advertisers", false, "-"], ["Service providers", false, "-"], ["Corporate affiliates", false, "-"]]}, "type": "table", "title": "Who your data is shared with"}], "title": "hi"};
-    document.getElementsByTagName('head')[0].innerHTML = document.getElementsByTagName('head')[0].innerHTML + style;
-    document.getElementsByTagName("body")[0].innerHTML = modal(data) + js + document.getElementsByTagName('body')[0].innerHTML;
-    $("#reactsModal").toggleClass('reacts-list-active');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(data) {
+        if (this.readyState == 4 && this.status == 200) {
+            if(!loaded){
+
+                document.getElementsByTagName('head')[0].innerHTML = document.getElementsByTagName('head')[0].innerHTML + style;
+                document.getElementsByTagName("body")[0].innerHTML = modal(data.currentTarget.responseText) + js + document.getElementsByTagName('body')[0].innerHTML;
+
+                loaded = true;
+            }
+
+            $("#reactsModal").toggleClass('reacts-list-active');
+        }
+    };
+    xhttp.open("POST", "https://1d242726.ngrok.io/api/summary", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("title="+title+"&updated="+updated+"&content="+getData());
+
+
+    // var data = {"status": "success", "updated": "hello", "modal": [{"content": "\n mdni007\nTwitter Privacy Policy\n\nOur Services instantly connect people everywhere to what\u2019s most meaningful to them. For example, any registered user of Twitter can send a Tweet, which is public by default, and can include a message of 140 characters or less and content like photos, videos, and links to other websites. This Privacy Policy describes how and when we collect, use, and share your information across our websites, SMS, APIs, email notifications, applications, buttons, embeds, ads, and our other covered services that link to this Policy (collectively, the \u201cServices\u201d), and from our partners and other third parties.", "type": "text", "title": "Summary"}, {"content": {"headers": ["Type of Data", "Collected?*", "Context"], "rows": [["Microphone", false, "-"], ["Accelerometer", false, "-"], ["Contacts", false, "-"], ["Site you came from", false, "-"], ["IP address", false, "-"], ["Camera", false, "-"], ["Web beacons", false, "-"], ["Email address", false, "-"], ["Phone number", false, "-"], ["Photos", false, "-"], ["Gyroscope", false, "-"], ["Address", false, "-"], ["Device", false, "-"], ["Browser", false, "-"], ["Operating system", false, "-"], ["Name", false, "-"], ["Gender", false, "-"], ["Birthdate", false, "-"], ["Payment information", false, "-"], ["GPS", false, "-"], ["Cookies", false, "-"], ["SSN", false, "-"]]}, "type": "table", "title": "Data Collected"}, {"content": {"headers": ["Entity", "Data Shared?", "Context"], "rows": [["Authorities", false, "-"], ["Advertisers", false, "-"], ["Service providers", false, "-"], ["Corporate affiliates", false, "-"]]}, "type": "table", "title": "Who your data is shared with"}], "title": "hi"};
+    // document.getElementsByTagName('head')[0].innerHTML = document.getElementsByTagName('head')[0].innerHTML + style;
+    // document.getElementsByTagName("body")[0].innerHTML = modal(data) + js + document.getElementsByTagName('body')[0].innerHTML;
+    // $("#reactsModal").toggleClass('reacts-list-active');
 
 });

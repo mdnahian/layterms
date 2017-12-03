@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, render_template, url_for
 import os
 import json
 import analyze_policy
@@ -7,65 +7,51 @@ import summary
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return 'running...'
-
-
-@app.route('/api/content', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 def content():
-    if request.method == 'POST':
-        text = request.form['content']
-        title = request.form['title']
-        updated = request.form['updated']
 
-        sum = summary.get_summary(text)
-        print sum
+    return render_template('index.html',
+                           info=[['Microphone', False, '-'], ['Accelerometer', False, '-'], ['Contacts', False, '-'], ['Site you came from', False, '-'], ['IP address', False, '-'], ['Camera', False, '-'], ['Web beacons', False, '-'], ['Email address', False, '-'], ['Phone number', False, '-'], ['Photos', False, '-'], ['Gyroscope', False, '-'], ['Address', False, '-'], ['Device', False, '-'], ['Browser', False, '-'], ['Operating system', False, '-'], ['Name', False, '-'], ['Gender', False, '-'], ['Birthdate', False, '-'], ['Payment information', False, '-'], ['GPS', False, '-'], ['Cookies', False, '-'], ['SSN', False, '-']]
+, entity=[['Authorities', False, '-'], ['Advertisers', False, '-'], ['Service providers', False, '-'], ['Corporate affiliates', False, '-']],sum='', title="Privacy Policy", updated='11/30/17')
+    # return ''
 
-        info, entity = analyze_policy.analyze(text)
-        info = filter(info)
-        entity = filter(entity)
-
-        print info
-        print entity
-
-        return json.dumps({
-            "modal": [
-                {
-                    "title": "Summary",
-                    "content": sum,
-                    "type": "text"
-                },
-                {
-                    "title": "Data Collected",
-                    "content": {
-                        "headers": [
-                            "Type of Data",
-                            "Collected?*",
-                            "Context"
-                        ],
-                        "rows": [['Microphone', False, '-'], ['Accelerometer', False, '-'], ['Contacts', False, '-'], ['Site you came from', False, '-'], ['IP address', False, '-'], ['Camera', False, '-'], ['Web beacons', False, '-'], ['Email address', False, '-'], ['Phone number', False, '-'], ['Photos', False, '-'], ['Gyroscope', False, '-'], ['Address', False, '-'], ['Device', False, '-'], ['Browser', False, '-'], ['Operating system', False, '-'], ['Name', False, '-'], ['Gender', False, '-'], ['Birthdate', False, '-'], ['Payment information', False, '-'], ['GPS', False, '-'], ['Cookies', False, '-'], ['SSN', False, '-']]
-                    },
-                    "type": "table"
-                },
-                {
-                    "title": "Who your data is shared with",
-                    "content": {
-                        "headers": [
-                            "Entity",
-                            "Data Shared?",
-                            "Context"
-                        ],
-                        "rows": [['Authorities', False, '-'], ['Advertisers', False, '-'], ['Service providers', False, '-'], ['Corporate affiliates', False, '-']]
-                    },
-                    "type": "table"
-                }
-            ],
-            "title": title,
-            "updated": updated,
-            "status": "success"
-        })
-    return '{"status": "error", "message": "invalid request method"}'
+    #     return json.dumps({
+    #         "modal": [
+    #             {
+    #                 "title": "Summary",
+    #                 "content": sum,
+    #                 "type": "text"
+    #             },
+    #             {
+    #                 "title": "Data Collected",
+    #                 "content": {
+    #                     "headers": [
+    #                         "Type of Data",
+    #                         "Collected?*",
+    #                         "Context"
+    #                     ],
+    #                    [['Microphone', False, '-'], ['Accelerometer', False, '-'], ['Contacts', False, '-'], ['Site you came from', False, '-'], ['IP address', False, '-'], ['Camera', False, '-'], ['Web beacons', False, '-'], ['Email address', False, '-'], ['Phone number', False, '-'], ['Photos', False, '-'], ['Gyroscope', False, '-'], ['Address', False, '-'], ['Device', False, '-'], ['Browser', False, '-'], ['Operating system', False, '-'], ['Name', False, '-'], ['Gender', False, '-'], ['Birthdate', False, '-'], ['Payment information', False, '-'], ['GPS', False, '-'], ['Cookies', False, '-'], ['SSN', False, '-']]
+    #                 },
+    #                 "type": "table"
+    #             },
+    #             {
+    #                 "title": "Who your data is shared with",
+    #                 "content": {
+    #                     "headers": [
+    #                         "Entity",
+    #                         "Data Shared?",
+    #                         "Context"
+    #                     ],
+    #                     "rows": [['Authorities', False, '-'], ['Advertisers', False, '-'], ['Service providers', False, '-'], ['Corporate affiliates', False, '-']]
+    #                 },
+    #                 "type": "table"
+    #             }
+    #         ],
+    #         "title": title,
+    #         "updated": updated,
+    #         "status": "success"
+    #     })
+    # return '{"status": "error", "message": "invalid request method"}'
 
 
 
