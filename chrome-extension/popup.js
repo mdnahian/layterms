@@ -20,19 +20,23 @@ function getLastUpdated(callback){
 
 
 function sendContent(id, title, updated){
-    $.post("https://1d242726.ngrok.io/api/content", {
-        "content": "",
-        "title": title,
-        "updated": updated
-    }).done(function(data) {
-        console.log(data);
-        var response = JSON.parse(data);
-        if(response.error == null){
-            chrome.tabs.sendMessage(id, {"data": response});
-        } else {
-            console.log(response.message);
-        }
+    chrome.tabs.sendMessage(id, {"action": "source"}, function(source) {
+        $.post("https://1d242726.ngrok.io/api/content", {
+            "content": source,
+            "title": title,
+            "updated": updated
+        }).done(function(data) {
+            console.log(data);
+            if(data.error === null){
+                chrome.tabs.sendMessage(id, {"action": "final", "data": data});
+            } else {
+                console.log(data.message);
+            }
+        });
+
     });
+
+
 }
 
 
