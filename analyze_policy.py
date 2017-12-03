@@ -1,4 +1,5 @@
 import re
+import json
 
 class Policy:
     def __init__(self, service, text):
@@ -79,36 +80,19 @@ info_types = {'name':
                 []
               }
 
-use_types = {'personalized content':
-                ['personalized content'],
-             'targeted ads':
-                ['targeted ads'],
-             'improving the product':
-                ['improving the product'],
-             'necessary communication':
-                ['necessary communication'],
-             'marketing communication':
-                ['marketing communication'],
-             'processing payment':
-                ['processing payment'],
-             'complying with the law':
-                ['complying with the law']
-              }
 
 entities = {'advertisers':
-                ['advertisers'],
+                ['advertisers', 'customize the advertising', 'targeted ad', 'targeted ads', 'tailored ad'],
             'corporate affiliates':
-                ['affiliates'],
+                ['affiliat', 'family of companies'],
             'authorities':
-                ['authorities'],
+                ['authorities', 'law', 'government'],
             'social media you log in with':
                 ['social media you log in with'],
-            'business partners':
-                ['business partners']
+            'service providers':
+                ['service providers']
               }
 
-def check_if_negative(data, subject):
-    pass
 
 def do_they_collect(data, info_type):
     data = data.lower()
@@ -120,11 +104,25 @@ def do_they_collect(data, info_type):
                     return True
     return False
 
-def is_use_used(use):
-    pass
-
 def can_see_info(entity):
-    pass
+    data = data.lower()
+    sentences = re.findall(r"([^.]*\.)", data)
+    sharing_keywords = collection_keywords + ['share', 'shares', 'sharing', 'disclose', 'discloses', 'disclosing']
+    if entity == 'advertisers':
+        for sentence in sentences:
+            for s_keyword in sharing_keywords:
+                for a_keyword in ['advertis', 'ads']:
+                    for t_keyword in ['target', 'tailor', 'customiz', 'personaliz']:
+                        if s_keyword.lower() in sentence and a_keyword.lower() in sentence and t_keyword.lower() in sentence and all(negative not in sentence for negative in neg_keywords):
+                            return True
+        return False
+    else:
+        for sentence in sentences:
+            for s_keyword in sharing_keywords:
+                for e_keyword in entities[entity]:
+                    if s_keyword.lower() in sentence and e_keyword.lower() in sentence and all(negative not in sentence for negative in neg_keywords):
+                        return True
+        return False
 
 def analyze(company, policy):
     info_dict = {}
@@ -134,8 +132,8 @@ def analyze(company, policy):
             info_dict[info_type] = do_they_collect(data, info_type)
     return info_dict
 
-print(analyze('Twitter', 'policies/twitter_policy.txt'))
-
+tdict = analyze('Twitter', 'policies/twitter_policy.txt')
+print(json.dumps(tdict))
 
 
 
