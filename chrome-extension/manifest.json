@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["jquery.min.js", "background.js"]
+      "js": ["jquery.min.js", "background.js", "he.js"]
     }
   ],
   "browser_action": {
@@ -14,6 +14,7 @@
     "default_popup": "index.html"
   },
   "permissions": [
+    "tabs",
     "activeTab"
   ]
 }
