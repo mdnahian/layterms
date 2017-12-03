@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Layterms",
-  "description": "Privacy policy in layman terms",
+  "description": "Privacy policies summarized in simple terms",
   "version": "1.0",
   "content_scripts": [
     {

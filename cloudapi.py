@@ -3,6 +3,7 @@ import json
 import pdb
 import os
 
+
 fileList = os.listdir('Corpus/Input/')
 # Opening file and reading policy
 for currFile in fileList:
