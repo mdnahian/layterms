@@ -1,0 +1,108 @@
+Your privacy is important to us. This privacy statement explains what personal data Microsoft collects from you, through our interactions with you and through our products, and how we use that data.
+
+Microsoft offers a wide range of products, from server products used to help operate enterprises worldwide, devices you use in your home, software students use at school, and services developers use to create and host what’s next. References to Microsoft products in this statement include Microsoft services, websites, apps, software, servers and devices.
+
+Please read the product-specific details in this privacy statement, which provide additional information about some of Microsoft products. This statement applies to Microsoft’s interactions with you and the Microsoft products listed below, as well as other Microsoft products that display this statement.
+Most Microsoft Sites use "cookies," small text files that can be read by a web server in the domain that put the cookie on your hard drive. We may use cookies to store your preferences and settings; help with sign-in; provide targeted ads; and analyze site operations. Click here to learn more.
+
+EU-U.S. & Swiss-U.S. Privacy Shield
+Microsoft adheres to the principles of the EU-U.S. and Swiss-U.S. Privacy Shield frameworks. To learn more, Click here.
+
+Personal Data We Collect
+Microsoft collects data to operate effectively and provide you the best experiences with our products. You provide some of this data directly, such as when you create a Microsoft account, administer your organization’s licensing account, submit a search query to Bing, register for a Microsoft event, speak a voice command to Cortana, upload a document to OneDrive, purchase an MSDN subscription, sign up for Office 365, or contact us for support. We get some of it by recording how you interact with our products by, for example, using technologies like cookies, and receiving error reports or usage data from software running on your device. We also obtain data from third parties.
+
+Learn More
+Top of page
+How We Use Personal Data
+Microsoft uses the data we collect to operate our business and provide you the products we offer, which includes using data to improve our products and personalize your experiences. We also may use the data to communicate with you, for example, informing you about your account, security updates and product information. And we use data to help show more relevant ads, whether in our own products supported by advertising like MSN and Bing, or in products offered by third parties. However, we do not use what you say in email, chat, video calls or voice mail, or your documents, photos or other personal files to target ads to you.
+
+Learn More
+Top of page
+Reasons We Share Personal Data
+We share your personal data with your consent or as necessary to complete any transaction or provide any product you have requested or authorized. We also share data with Microsoft-controlled affiliates and subsidiaries; with vendors working on our behalf; when required by law or to respond to legal process; to protect our customers; to protect lives; to maintain the security of our products; and to protect the rights or property of Microsoft.
+
+Learn More
+Top of page
+How to Access & Control Your Personal Data
+You can view, edit, or delete your personal data online for many Microsoft products. You can also make choices about Microsoft's collection and use of your data. How you can access or control your personal data will depend on which products you use.
+
+You can always choose whether you wish to receive promotional email, SMS messages, telephone calls and postal mail from Microsoft. You can also opt out from receiving interest-based advertising from Microsoft by visiting our opt-out page.
+
+Learn More
+Top of page
+Cookies & Similar Technologies
+Microsoft uses cookies (small text files placed on your device) and similar technologies to provide our websites and online services and to help collect data. Cookies allow us, among other things, to store your preferences and settings; enable you to sign-in; provide interest-based advertising; combat fraud; and analyze how our websites and online services are performing. Microsoft apps use other identifiers, such as the advertising ID in Windows described in the Windows section of this statement, for similar purposes.
+
+We also use web beacons to help deliver cookies and gather usage and performance data. Our websites may include web beacons and cookies from third-party service providers.
+
+You have a variety of tools to control cookies, web beacons and similar technologies, including browser controls to block and delete cookies and controls from some third-party analytics service providers to opt out of data collection through web beacons and similar technologies. Your browser and other choices may impact your experiences with our products.
+
+Learn More
+Top of page
+Notice to End Users
+Many Microsoft products are intended for use by organizations and are administered to you by your organization. Your use of Microsoft products may be subject to your organization's policies, if any. If your organization is administering your use of the Microsoft products, please direct your privacy inquiries to your administrator. When you use social features of such products, other users in your network may see some of your activity. To learn more about the social features and other functionality, please review documentation or help content specific to the Microsoft product. Microsoft is not responsible for the privacy or security practices of our customers, which may differ from those set forth in this privacy statement.
+
+If you use an email address provided by an organization you are affiliated with, such as an employer or school, to access Microsoft online services, the owner of the domain (e.g., your employer) associated with your email address may: (i) control and administer your Microsoft online services account and (ii) access and process your data, including the contents of your communications and files.
+
+Top of page
+Microsoft account
+With a Microsoft account, you can sign into Microsoft products, as well as those of select Microsoft Partners. Signing into your account enables improved personalization, provides seamless and consistent experiences across products and devices, permits you to access and use cloud data storage, allows you to make payments using payment instruments stored in your Microsoft account, and enable other enhanced features and settings.
+
+When you sign into your account to access a product, we create a record of that sign in. If you sign into a third-party service with your Microsoft account, you will be asked to consent to share the account data required by that service.
+
+Learn More
+Top of page
+Other Important Privacy Information
+Below you will find additional privacy information you may find important. You can also find more information on Microsoft's commitment to protecting your privacy at privacy.microsoft.com.
+
+Learn More
+Top of page
+Product-specific details:
+Enterprise and Developer Products
+Enterprise and Developer Products are Microsoft products and related software offered and designed primarily for use by organizations and developers. They include:
+
+Cloud services referred to as Online Services in the Microsoft Online Services Terms (OST), such as Office 365, Microsoft Azure, Microsoft Dynamics365, Microsoft Intune, and Yammer, for which an organization (our customer) contracts with Microsoft for the services (“Enterprise Online Services”).
+Server and developer products, such as Windows Server, SQL Server, Visual Studio, and System Center (“Enterprise and Developer Software”).
+Appliances and hardware used for storage infrastructure, such as StorSimple (“Enterprise Appliances”); and
+Cognitive Services, such as Emotion API, Bing Speech API, Recommendations API, for which an organization or developer (our customer) contracts with Microsoft for the services (“Cognitive Services”).
+Developer services such as Bot Framework, Cortana Skills Kit, and Botlet Store.
+In the event of a conflict between this Microsoft privacy statement and the terms of any agreement(s) between a customer and Microsoft for Enterprise and Developer Products, the terms of those agreement(s) will control.
+
+You can also learn more about our Enterprise and Developer Products’ features and settings, including choices that impact your privacy or your end users’ privacy, in product documentation.
+
+If any of the terms below are not defined in this Privacy Statement or the OST, they have the definitions below.
+
+General. When a customer tries, purchases, uses, or subscribes to Enterprise and Developer Products, or obtains support for such products, Microsoft collects data to provide the service, including uses compatible with providing the service, provide the best experiences with our products, operate our business, and communicate with the customer. For example:
+
+When a customer engages with a Microsoft sales representative, we collect the customer’s name and contact data, along with information about the customer’s organization, to support that engagement.
+When a customer interacts with a Microsoft support professional, we collect Device and Usage data or error reports to diagnose and resolve problems.
+When a customer pays for products, we collect contact and payment data to process the payment.
+When a customer receives communications from Microsoft, we use data to personalize the content of the communication.
+The Enterprise and Developer Products enable you to purchase, subscribe to or use other products and online services from Microsoft or third parties with different privacy practices, and those other products and online services will be governed by their respective privacy statements and policies.
+
+Learn More
+Top of page
+Productivity and Communications Products
+Productivity and Communications products are applications, software and services you can use to create, store and share documents, as well as communicate with others.
+
+Learn More
+Top of page
+Search and Artificial Intelligence
+Search and Artificial Intelligence products connect you with information and intelligently sense, process and act on information—learning and adapting over time.
+
+Learn More
+Top of page
+Windows
+Windows is a personalized computing environment that enables you to seamlessly roam and access services, preferences and content across your computing devices from phones to tablets to the Surface Hub. Rather than residing as a static software program on your device, key components of Windows are cloud-based, and both cloud and local elements of Windows are updated regularly, providing you with the latest improvements and features. In order to provide this computing experience, we collect data about you, your device, and the way you use Windows. And because Windows is personal to you, we give you choices about the personal data we collect and how we use it. Note that if your Windows device is managed by your organization (such as your employer or school), your organization may use centralized management tools provided by Microsoft or others to control device settings, device policies, software updates, data collection by us or the organization, or other aspects of your device. For more information about data collection and privacy in Windows, go to go.microsoft.com/fwlink/?LinkId=529552. Legacy versions of Windows (including Vista, 7, 8, and 8.1) are subject to their own privacy statements.
+
+Learn More
+Top of page
+Entertainment and Related Services
+Entertainment and Related Services power rich experiences and enable you to access a variety of content, applications and games.
+
+Learn More
+Top of page
+Microsoft Health Services
+Microsoft Health services can help you understand and manage your health data. They include HealthVault, HealthVault Insights, Microsoft Band devices, other Microsoft Health applications and related products. The Band helps you keep track of data like heart rate and steps taken. The Band can also use Cortana to take notes and receive notifications from your phone. The Microsoft Health applications send data to Microsoft's servers and allow you to view, manage and control the data. The applications may enable notifications to the Band and other devices. HealthVault services let you gather, edit, add to, and store health data online, along with share your health data with family, caregivers, and health care professionals.
+
+Microsoft Health services collect and use your data to provide the services, which includes improving and personalizing your experiences. Health data you provide to Microsoft through Microsoft Health services is not combined with data from other Microsoft services, or used for other purposes without your explicit consent. For example, Microsoft does not use your health record data to market or advertise to you without your opt-in consent.
