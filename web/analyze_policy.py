@@ -16,60 +16,60 @@ collection_keywords = ['get', 'gets', 'getting',
 
 neg_keywords = ['do not', 'does not', 'will not', 'never', 'will never', 'won\'t', 'doesn\'t']
 
-info_types = {'name':
+info_types = {'Name':
                 ['your name'],
-              'birthdate':
+              'Birthdate':
                 ['birthday', 'date of birth', 'birth date', 'day of birth', 'year of birth'],
-              'address':
+              'Address':
                 ['home address', 'your address', 'postal address', 'shipping address', 'billing address', ', address'],
-              'phone number':
+              'Phone number':
                 ['phone number', 'mobile number', 'home number', 'telephone number'],
-              'email address':
+              'Email address':
                 ['email address', 'e-mail address'],
-              'payment information':
+              'Payment information':
                 ['payment information', 'payment details', 'payment data', 'financial information', 'bank account number', 'bank account numbers', 'card number', 'card numbers', 'credit card information', 'debit card information', 'bank account information'],
               'SSN':
                 ['SSN', 'social security number', 'social security numbers'],
               'IP address':
                 ['IP address', 'IP addresses', ' IP ', 'Internet Protocol'],
-              'browser':
+              'Browser':
                 ['browser type', 'type of browser'],
-              'device':
+              'Device':
                 ['device type', 'type of device'],
-              'accelerometer':
+              'Accelerometer':
                 ['accelerometer'],
-              'gyroscope':
+              'Gyroscope':
                 ['gyroscope'],
               'GPS':
                 ['GPS'],
-              'microphone':
+              'Microphone':
                 ['microphone'],
-              'camera':
+              'Camera':
                 ['camera'],
-              'photos':
+              'Photos':
                 ['photos'],
-              'contacts':
+              'Contacts':
                 ['contacts'],
-              'gender':
+              'Gender':
                 ['gender'],
-              'cookies':
+              'Cookies':
                 ['cookie', 'cookies'],
-              'web beacons':
+              'Web beacons':
                 ['beacon', 'tracker pixel'],
-              'operating system':
+              'Operating system':
                 ['operating system'],
-              'previous/next url':
+              'Site you came from':
                 ['referral URL', 'clickstream', 'referrer URL', 'referring site', 'referrer site', 'referral site', 'referring page', 'referring URL', 'exit page', 'exit URL', 'site you came from', 'site you go to next', 'that referred you']
               }
 
 
-entities = {'advertisers':
+entities = {'Advertisers':
                 ['advertisers', 'customize the advertising', 'targeted ad', 'targeted ads', 'tailored ad'],
-            'corporate affiliates':
+            'Corporate affiliates':
                 ['affiliat', 'family of companies', 'parent corporation', 'parent company', 'subsidiary', 'subsidiaries', 'corporate family'],
-            'authorities':
+            'Authorities':
                 ['authorities', 'law', 'government'],
-            'service providers':
+            'Service providers':
                 ['service provider']
               }
 
@@ -103,13 +103,14 @@ def can_see_info(data, entity):
         return False, None
 
 def analyze(policy):
-    info_dict = {}
-    entity_dict = {}
+    info_array = []
+    entity_array = []
     with open(policy, 'r', encoding='utf8') as textfile:
         data = textfile.read().replace('\n', '')
         for info_type in info_types:
-            info_dict[info_type] = do_they_collect(data, info_type)
+            info_array.append([info_type] + list(do_they_collect(data, info_type)))
         for entity in entities:
-            entity_dict[entity] = can_see_info(data, entity)
-    return info_dict, entity_dict
+            entity_array.append([entity] + list(can_see_info(data, entity)))
+    return info_array, entity_array
 
+print(analyze('policies/twitter_policy.txt'))
