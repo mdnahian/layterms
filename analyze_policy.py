@@ -1,9 +1,5 @@
 import re
-
-class Policy:
-    def __init__(self, service, text):
-        self.service = service 
-        self.text = text # should be list of paragraphs with headings
+import json
 
 collection_keywords = ['get', 'gets', 'getting',
                        'collect', 'collects', 'collecting',
@@ -14,13 +10,14 @@ collection_keywords = ['get', 'gets', 'getting',
                        'give', 'gives', 'giving',
                        'store', 'stores', 'storing',
                        'obtain', 'obtains', 'obtaining',
-                       'provide', 'provides', 'providing'
+                       'provide', 'provides', 'providing',
+                       'access', 'accesses', 'accessing'
                        ]
 
 neg_keywords = ['do not', 'does not', 'will not', 'never', 'will never', 'won\'t', 'doesn\'t']
 
 info_types = {'name':
-                ['name'],
+                ['your name'],
               'birthdate':
                 ['birthday', 'date of birth', 'birth date', 'day of birth', 'year of birth'],
               'address':
@@ -55,87 +52,64 @@ info_types = {'name':
                 ['contacts'],
               'gender':
                 ['gender'],
-              'third party login credentials':
-                [],
-              'third party account information':
-                [],
-              'service provider':
-                ['service provider'],
               'cookies':
                 ['cookie', 'cookies'],
               'web beacons':
-                ['beacons', 'beacon', 'web beacons', 'web beacon', 'tracker pixel', 'tracker pixels'],
-              'network connection type':
-                [],
+                ['beacon', 'tracker pixel'],
               'operating system':
                 ['operating system'],
-              'language':
-                ['language'],
-              'previous url':
-                [],
-              'next url':
-                [],
-              'interactions with ad':
-                []
+              'previous/next url':
+                ['referral URL', 'clickstream', 'referrer URL', 'referring site', 'referrer site', 'referral site', 'referring page', 'referring URL', 'exit page', 'exit URL', 'site you came from', 'site you go to next', 'that referred you']
               }
 
-use_types = {'personalized content':
-                ['personalized content'],
-             'targeted ads':
-                ['targeted ads'],
-             'improving the product':
-                ['improving the product'],
-             'necessary communication':
-                ['necessary communication'],
-             'marketing communication':
-                ['marketing communication'],
-             'processing payment':
-                ['processing payment'],
-             'complying with the law':
-                ['complying with the law']
-              }
 
 entities = {'advertisers':
-                ['advertisers'],
+                ['advertisers', 'customize the advertising', 'targeted ad', 'targeted ads', 'tailored ad'],
             'corporate affiliates':
-                ['affiliates'],
+                ['affiliat', 'family of companies', 'parent corporation', 'parent company', 'subsidiary', 'subsidiaries', 'corporate family'],
             'authorities':
-                ['authorities'],
-            'social media you log in with':
-                ['social media you log in with'],
-            'business partners':
-                ['business partners']
+                ['authorities', 'law', 'government'],
+            'service providers':
+                ['service provider']
               }
 
-def check_if_negative(data, subject):
-    pass
 
 def do_they_collect(data, info_type):
-    data = data.lower()
     sentences = re.findall(r"([^.]*\.)", data)
     for sentence in sentences:
         for c_keyword in collection_keywords:
             for i_keyword in info_types[info_type]:
-                if c_keyword.lower() in sentence and i_keyword.lower() in sentence and all(negative not in sentence for negative in neg_keywords):
-                    return True
-    return False
+                if c_keyword.lower() in sentence.lower() and i_keyword.lower() in sentence and all(negative not in sentence for negative in neg_keywords):
+                    return True, sentence
+    return False, None
 
-def is_use_used(use):
-    pass
+def can_see_info(data, entity):
+    sentences = re.findall(r"([^.]*\.)", data)
+    sharing_keywords = collection_keywords + ['share', 'shares', 'sharing', 'disclose', 'discloses', 'disclosing']
+    if entity == 'advertisers':
+        for sentence in sentences:
+            for s_keyword in sharing_keywords:
+                for a_keyword in ['advertis', 'ads']:
+                    for t_keyword in ['target', 'tailor', 'customiz', 'personaliz']:
+                        if s_keyword.lower() in sentence and a_keyword.lower() in sentence.lower() and t_keyword.lower() in sentence and all(negative not in sentence for negative in neg_keywords):
+                            return True, sentence
+        return False, None
+    else:
+        for sentence in sentences:
+            for s_keyword in sharing_keywords:
+                for e_keyword in entities[entity]:
+                    if s_keyword.lower() in sentence.lower() and e_keyword.lower() in sentence and all(negative not in sentence for negative in neg_keywords):
+                        return True, sentence
+        return False, None
 
-def can_see_info(entity):
-    pass
-
-def analyze(company, policy):
+def analyze(policy):
     info_dict = {}
+    entity_dict = {}
     with open(policy, 'r', encoding='utf8') as textfile:
         data = textfile.read().replace('\n', '')
         for info_type in info_types:
             info_dict[info_type] = do_they_collect(data, info_type)
-    return info_dict
-
-print(analyze('Twitter', 'policies/twitter_policy.txt'))
-
-
-
+        for entity in entities:
+            entity_dict[entity] = can_see_info(data, entity)
+    return info_dict, entity_dict
 
