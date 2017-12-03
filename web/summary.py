@@ -7,3 +7,4 @@ def get_summary(input):
     algo = client.algo('nlp/Summarizer/0.1.6')
     a=algo.pipe(input)
     return a.result
+

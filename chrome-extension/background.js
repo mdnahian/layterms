@@ -67,22 +67,49 @@ function generateContent(data) {
 }
 
 
+function reloadContent(title, updated, callback) {
+    $.post("https://1d242726.ngrok.io/api/content", {
+        "content": getData(),
+        "title": title,
+        "updated": updated
+    }).done(function(data) {
+        console.log('second time');
+        if(data.status !== "error"){
+            callback(data);
+        } else {
+            console.log("error");
+            callback([]);
+        }
+        $("#analyze").removeClass('is-loading');
+    });
+}
+
+
+function getData(){
+    var html_text = document.getElementsByTagName('body')[0].innerHTML.replace(/<[^>]+>/g, '');
+    return he.decode(html_text)
+}
+
+
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, callback) {
+        console.log('done');
         if(request.action === 'source'){
-            var html_text = document.getElementsByTagName('body')[0].innerHTML.replace(/<[^>]+>/g, '');
-            callback(he.decode(html_text));
+            callback(getData());
         } else if(request.action === "final") {
 
-            if(!loaded){
-                document.getElementsByTagName('head')[0].innerHTML = document.getElementsByTagName('head')[0].innerHTML + style;
-                document.getElementsByTagName("body")[0].innerHTML = modal(request.data) + js + document.getElementsByTagName('body')[0].innerHTML;
+            reloadContent(request.data.title, request.data.updated, function (data) {
+                if(!loaded){
+                    document.getElementsByTagName('head')[0].innerHTML = document.getElementsByTagName('head')[0].innerHTML + style;
+                    document.getElementsByTagName("body")[0].innerHTML = modal(data) + js + document.getElementsByTagName('body')[0].innerHTML;
 
-                loaded = true;
-            }
+                    loaded = true;
+                }
 
-            $("#reactsModal").toggleClass('reacts-list-active');
+                $("#reactsModal").toggleClass('reacts-list-active');
+            });
+
         } else if(request.action === "updated"){
             callback(document.lastModified.substring(0, 10));
         } else {
@@ -90,5 +117,7 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
+
+
 
 

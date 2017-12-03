@@ -105,12 +105,12 @@ def can_see_info(data, entity):
 def analyze(policy):
     info_array = []
     entity_array = []
-    with open(policy, 'r', encoding='utf8') as textfile:
-        data = textfile.read().replace('\n', '')
-        for info_type in info_types:
-            info_array.append([info_type] + list(do_they_collect(data, info_type)))
-        for entity in entities:
-            entity_array.append([entity] + list(can_see_info(data, entity)))
+
+    data = policy.encode('utf-8').replace('\n', '')
+    for info_type in info_types:
+        info_array.append([info_type] + list(do_they_collect(data, info_type)))
+    for entity in entities:
+        entity_array.append([entity] + list(can_see_info(data, entity)))
     return info_array, entity_array
 
 # print(analyze('policies/twitter_policy.txt'))

@@ -28,11 +28,12 @@ function sendContent(id, title, updated){
             "title": title,
             "updated": updated
         }).done(function(data) {
-            console.log(data);
             if(data.status !== "error"){
-                chrome.tabs.sendMessage(id, {"action": "final", "data": data});
+                console.log('sending...');
+                chrome.tabs.create({'url': chrome.extension.getURL('response.html')+"?title="+title+"&updated="+updated});
+                // chrome.tabs.sendMessage(id, {"action": "final", "data": data});
             } else {
-                console.log(data.message);
+                console.log("error");
             }
             $("#analyze").removeClass('is-loading');
         });
