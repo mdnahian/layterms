@@ -3,6 +3,13 @@ import os
 import json
 import analyze_policy
 import summary
+import getEntityGraph
+import requests
+from bs4 import BeautifulSoup
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 app = Flask(__name__)
 
@@ -10,10 +17,26 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def content():
 
-    return render_template('index.html',
-                           info=[['Microphone', False, '-'], ['Accelerometer', False, '-'], ['Contacts', False, '-'], ['Site you came from', False, '-'], ['IP address', False, '-'], ['Camera', False, '-'], ['Web beacons', False, '-'], ['Email address', False, '-'], ['Phone number', False, '-'], ['Photos', False, '-'], ['Gyroscope', False, '-'], ['Address', False, '-'], ['Device', False, '-'], ['Browser', False, '-'], ['Operating system', False, '-'], ['Name', False, '-'], ['Gender', False, '-'], ['Birthdate', False, '-'], ['Payment information', False, '-'], ['GPS', False, '-'], ['Cookies', False, '-'], ['SSN', False, '-']]
-, entity=[['Authorities', False, '-'], ['Advertisers', False, '-'], ['Service providers', False, '-'], ['Corporate affiliates', False, '-']],sum='', title="Privacy Policy", updated='11/30/17')
-    # return ''
+    link = request.args.get('url')
+    title = request.args.get('title')
+    updated= request.args.get('updated')
+    html = requests.get(link).text
+    soup = BeautifulSoup(html)
+    text = ''.join(soup.findAll(text=True))
+
+    sum= ''
+
+    try:
+        sum = summary.get_summary(text.encode('utf-8'))
+        getEntityGraph.kindamain(text.encode('utf-8'))
+    except:
+        pass
+
+
+    info, entity = analyze_policy.analyze(text)
+
+    return render_template('index.html', info=info
+, entity=entity, sum=sum, title=title, updated=updated)   # return ''
 
     #     return json.dumps({
     #         "modal": [
@@ -63,7 +86,6 @@ def sumry():
         updated = request.form['updated']
 
         sum = summary.get_summary(text)
-
         return json.dumps({
             "modal": [
                 {

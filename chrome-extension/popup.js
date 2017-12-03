@@ -9,7 +9,8 @@ function getCurrentTabTitle(callback) {
         var tab = tabs[0];
         var title = tab.title;
         var id = tab.id;
-        callback(title, id);
+        var url = tab.url;
+        callback(title, id, url);
     });
 }
 
@@ -21,7 +22,7 @@ function getLastUpdated(id, callback){
 }
 
 
-function sendContent(id, title, updated){
+function sendContent(id, title, updated, url){
     // chrome.tabs.sendMessage(id, {"action": "source"}, function(source) {
     //     $.post("https://1d242726.ngrok.io", {
     //         "content": source,
@@ -43,20 +44,20 @@ function sendContent(id, title, updated){
     //
     // });
 
-    chrome.tabs.create({'url': "https://1d242726.ngrok.io"});
+    chrome.tabs.create({'url': "https://1d242726.ngrok.io?title="+title+"&updated="+updated+"&url="+url});
 
 
 }
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    getCurrentTabTitle(function(title, id) {
+    getCurrentTabTitle(function(title, id, url) {
         getLastUpdated(id, function(updated) {
             document.getElementById('title').innerHTML = title;
             document.getElementById('updated').innerHTML = updated;
             $("#analyze").click(function () {
                 $("#analyze").addClass('is-loading');
-                sendContent(id, title, updated);
+                sendContent(id, title, updated, url);
             })
         });
     });

@@ -4,47 +4,57 @@
     <meta charset="UTF-8">
     <title>layterms</title>
 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bulma.css') }}">
         <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
         <script src="{{ url_for('static', filename='he.js')}}"></script>
         <!--<script src="page.js"></script>-->
-        <style>.reacts-container { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color:#ffffff; z-index: 9999; overflow:hidden; overflow-y:auto; } .reacts-modal { position: absolute; width: 960px; height:100%; min-height: 640px; background-color: #ffffff; padding: 16px; left: 50%; top:0; bottom:0; margin-left: -480px; } .close-btn { position: absolute; right: 16px; top: 16px; color: #242424; font-weight: bold; font-family: Verdana; cursor: pointer; font-size:36px; } .reacts-modal-content { margin-top:16px; } .reacts-list-active { display: block; } .reacts-modal-title h2, .reacts-modal-title h5 { margin-top:0; margin-bottom:0; } .reacts-modal-content table { width:100%; } .reacts-modal-content th { padding:4px; background-color:#eeeeee; } .reacts-modal-content td { padding:4px; }</style></head>
+        <!--<style>*{font-family:verdana;} body{background-color:#FFBA8;} .reacts-container { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color:#FFBA8; z-index: 9999; overflow:hidden; overflow-y:auto; } .reacts-modal { position: absolute; width: 960px; height:100%; min-height: 640px; background-color: #ffffff; padding: 16px; left: 50%; top:0; bottom:0; margin-left: -480px; } .close-btn { position: absolute; right: 16px; top: 16px; color: #242424; font-weight: bold; font-family: Verdana; cursor: pointer; font-size:36px; } .reacts-modal-content { margin-top:16px; } .reacts-list-active { display: block; } .reacts-modal-title h2, .reacts-modal-title h5 { margin-top:0; margin-bottom:0; } .reacts-modal-content table { width:100%; } .reacts-modal-content th { padding:4px; background-color:#eeeeee; } .reacts-modal-content td { padding:4px; }</style></head>-->
 </head>
 <body>
-    <div id="reactsModal" class="reacts-container reacts-list-active">
-        <div id="closeBtn" class="close-btn">X</div>
-        <div class="reacts-modal">
+    <div id="reactsModal" class="section">
+        <!--<div id="closeBtn" class="close-btn">X</div>-->
+        <div class="container">
             <div class="reacts-modal-title">
-                <h2>{{ title }}</h2>
-                <h5>{{ updated }}</h5> </div>
-            <div class="reacts-modal-content"><h3>Summary</h3>
-                <p>
-                    {{ sum }}
-                </p>
+                <h1 class="title">{{ title }}</h1>
+                <h2 class="subtitle">{{ updated }}</h2> </div>
+
+            <div class="section">
+                <div class="container">
+                    <h2 class="title">Summary</h2>
+                    <p>
+                        {{ sum }}
+                    </p>
+                </div>
             </div>
 
-            <div class="reacts-modal-content"><h3>Data Collected</h3>
-                <table>
-                    <thead>
-                        <tr>
-                          <th>Type of Data</th>
-                            <th>Collected?*</th>
-                            <th>Context</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for e in info %}
+            <div class="section">
+                <div class="container">
+                    <h2 class="title">Data Collected</h2>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                {% for i in e %}
-                                    <td>{{ i }}</td>
-                                {% endfor %}
+                              <th>Type of Data</th>
+                                <th>Collected?*</th>
+                                <th>Context</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-              </table>
+                        </thead>
+                        <tbody>
+                            {% for e in info %}
+                                <tr>
+                                    {% for i in e %}
+                                        <td>{{ i }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                  </table>
+                </div>
             </div>
 
-            <div class="reacts-modal-content"><h3>Who your data is shared with</h3>
-                <table>
+            <div class="section">
+                <div class="container">
+                    <h2 class="title">Who your data is shared with</h2>
+                <table class="table">
                     <thead>
                         <tr>
                           <th>Entity</th>
@@ -62,7 +72,9 @@
                         {% endfor %}
                     </tbody>
               </table>
+                </div>
             </div>
+
 
             <img src="{{url_for('static', filename='graph.png')}}" style="width:100%"/>
         </div>

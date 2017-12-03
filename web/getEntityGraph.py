@@ -53,28 +53,29 @@ def getSalience(jsonData):
     jsonData = jsonData['entities']
     for i,currE in enumerate(jsonData):
         if currE['name'] in entityNames:
-            print('wa')
+            # print('wa')
             currGraphValues[currE['name']]=jsonData[i]['salience']
 
 # Main
-f = open('Corpus/Input/craigslist_policy.txt')
-txt = f.readlines()
-txt = '\n'.join(txt)
+# f = open('Corpus/Input/craigslist_policy.txt')
+# txt = f.readlines()
+# txt = '\n'.join(txt)
 
-jsonData = getEntity(txt)
-getSalience(jsonData)
+def kindamain(txt):
+    jsonData = getEntity(txt)
+    getSalience(jsonData)
 
-# Open Image
-source_img = Image.open('insight_graph.png').convert("RGBA")
-draw = ImageDraw.Draw(source_img)
+    # Open Image
+    source_img = Image.open('insight_graph.png').convert("RGBA")
+    draw = ImageDraw.Draw(source_img)
 
-for key in currGraphValues.keys():
-    size = 3
-    index = entityNames.index(key)
+    for key in currGraphValues.keys():
+        size = 3
+        index = entityNames.index(key)
 
-    x_center = 135+54*index
-    y_center = -566*currGraphValues[key]+578
+        x_center = 135+54*index
+        y_center = -566*currGraphValues[key]+578
 
-    draw.rectangle(((x_center-size, y_center-size), (x_center+size, y_center+size)), fill="red")
+        draw.rectangle(((x_center-size, y_center-size), (x_center+size, y_center+size)), fill="red")
 
-source_img.save('currentInsightGraph.png', "PNG")
+    source_img.save('static/graph.png', "PNG")
