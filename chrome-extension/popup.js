@@ -14,8 +14,10 @@ function getCurrentTabTitle(callback) {
 }
 
 
-function getLastUpdated(callback){
-    callback(document.lastModified.substring(0, 10));
+function getLastUpdated(id, callback){
+    chrome.tabs.sendMessage(id, {"action": "updated"}, function(updated) {
+        callback(updated);
+    });
 }
 
 
@@ -27,7 +29,7 @@ function sendContent(id, title, updated){
             "updated": updated
         }).done(function(data) {
             console.log(data);
-            if(data.error === null){
+            if(data.status !== "error"){
                 chrome.tabs.sendMessage(id, {"action": "final", "data": data});
             } else {
                 console.log(data.message);
@@ -43,7 +45,7 @@ function sendContent(id, title, updated){
 
 document.addEventListener('DOMContentLoaded', function () {
     getCurrentTabTitle(function(title, id) {
-        getLastUpdated(function(updated) {
+        getLastUpdated(id, function(updated) {
             document.getElementById('title').innerHTML = title;
             document.getElementById('updated').innerHTML = updated;
             $("#analyze").click(function () {

@@ -1,5 +1,8 @@
 from flask import Flask, request, url_for
 import os
+import json
+import analyze_policy
+import summary
 
 app = Flask(__name__)
 
@@ -17,9 +20,39 @@ def content():
         title = request.form['title']
         updated = request.form['updated']
 
-        
+        sum = summary.get_summary(text)
 
-    return ''
+        info, entity = analyze_policy.analyze(text)
+
+
+        return json.dumps({
+            "modal": [
+                {
+                    "title": "Summary",
+                    "content": sum,
+                    "type": "text"
+                },
+                {
+                    "title": "Data Collected",
+                    "content": {
+                        "headers": [
+                            "Type of Data",
+                            "Collected?*",
+                            "Context"
+                        ],
+                        "rows": [
+
+                        ]
+                    }
+                },
+                {
+                    ""
+                }
+            ],
+            "title": title,
+            "updated": updated
+        })
+    return '{"status": "error", "message": "invalid request method"}'
 
 
 
