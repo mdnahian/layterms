@@ -113,4 +113,4 @@ def analyze(policy):
             entity_array.append([entity] + list(can_see_info(data, entity)))
     return info_array, entity_array
 
-print(analyze('policies/twitter_policy.txt'))
+# print(analyze('policies/twitter_policy.txt'))
