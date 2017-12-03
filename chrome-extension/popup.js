@@ -32,6 +32,7 @@ function sendContent(id, title, updated){
             } else {
                 console.log(data.message);
             }
+            $("#analyze").removeClass('is-loading');
         });
 
     });
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('title').innerHTML = title;
             document.getElementById('updated').innerHTML = updated;
             $("#analyze").click(function () {
+                $("#analyze").addClass('is-loading');
                 sendContent(id, title, updated);
             })
         });
